@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Архитектурный Проект: Рамадан 2026</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            /* Сетка чертежа */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            overflow: hidden;
+        }
+
+        /* Силуэт мечети тонкими линиями */
+        .background-art {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 300px;
+            opacity: 0.1;
+            background: url('https://cdn-icons-png.flaticon.com') no-repeat bottom center;
+            background-size: contain;
+            z-index: -1;
+        }
+
+        .blueprint-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #222;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 10px 10px 0px #bc9c6a;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #222;
+            text-transform: uppercase;
+        }
+
+        .ramadan-text {
+            color: #bc9c6a;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        #timer {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .time-label {
+            font-size: 0.7rem;
+            color: #777;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-art"></div>
+
+    <div class="blueprint-card">
+        <div style="font-size: 10px; color: #999; text-align: left; margin-bottom: 10px;">ID: 1.25 / TYPE: GREETING</div>
+        <h1>Ассаломуалейкум ПИА 1-25 Жаматы 1,25</h1>
+        <div class="ramadan-text">Рамадан Мубарак 2026</div>
+        
+        <div id="timer">
+            <div class="time-block">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">Дней</span>
+            </div>
+            <div class="time-block">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">Часов</span>
+            </div>
+            <div class="time-block">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">Мин</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTimer() {
+            // Дата начала Рамадана 2026 (примерно 18 февраля)
+            const ramadanDate = new Date('February 18, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = ramadanDate - now;
+
+            if (distance < 0) {
+                document.getElementById('timer').innerHTML = "Месяц Рамадан начался!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
